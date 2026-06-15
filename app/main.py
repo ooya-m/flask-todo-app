@@ -72,7 +72,7 @@ def index():
                 cur.close()
                 conn.close()
 
-            # 削除処理
+        # 削除処理
         if "delete_id" in request.form:
             delete_id = request.form.get("delete_id")
             conn = get_conn()
