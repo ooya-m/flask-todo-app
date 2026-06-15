@@ -1,0 +1,15 @@
+.table-task .col-task { width: 29%; }
+.table-task .col-member { width: 14%; }
+.table-task .col-date { width: 14%; }
+.table-task .col-note { width: 29%; }
+.table-task .col-btn { width: 6%; }
+
+.table-task th.no-border-right,
+.table-task td.no-border-right {
+    border-right: none !important;
+}
+
+.table-task th.no-border-left,
+.table-task td.no-border-left {
+    border-left: none !important;
+}

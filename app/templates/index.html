@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container my-2">
+    <h1 class="mb-4">タスク管理</h1>
+
+    <form method="post" class="mb-4">
+        <div class="row mb-2 align-items-center">
+            <label class="col-sm-2 col-form-label fw-bold text-end">タスク：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control text-start" name="task" required>
+            </div>
+        </div>
+
+        <div class="row mb-2 align-items-center">
+            <label class="col-sm-2 col-form-label fw-bold text-end">担当者：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control text-start" name="member_name">
+            </div>
+        </div>
+
+        <div class="row mb-2 align-items-center">
+            <label class="col-sm-2 col-form-label fw-bold text-end">期限：</label>
+            <div class="col-sm-7">
+                <input type="date" class="form-control text-start" name="limit_date">
+            </div>
+        </div>
+
+        <div class="row mb-2 align-items-center">
+            <label class="col-sm-2 col-form-label fw-bold text-end">備考：</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control text-start" name="note">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-7 offset-sm-2 text-end">
+                <button type="submit" class="btn btn-primary px-4">追加</button>
+            </div>
+        </div>
+    </form>
+
+    <hr>
+    <h2 class="mb-3 text-center">タスク一覧</h2>
+
+    <table class="table table-hover table-bordered align-middle table-task">
+        <thead class="table-light">
+            <tr>
+                <th class="col-task">タスク</th>
+                <th class="col-member">担当者</th>
+                <th class="col-date">期限</th>
+                <th class="col-note">備考</th>
+                <th class="no-border-right col-btn"></th>
+                <th class="no-border-left col-btn"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for id, task, member_name, limit_date, note in todo_data %}
+            <tr>
+                <td>{{ task }}</td>
+                <td>{{ member_name }}</td>
+                <td>{{ limit_date }}</td>
+                <td>{{ note }}</td>
+
+                <td class="text-center no-border-right">
+                    <form method="post" id="update_form{{ id }}" onsubmit="return update_todo({{ id }});">
+                        <input type="hidden" name="update_id" value="{{ id }}">
+                        <button class="btn btn-sm btn-success me-1 text-nowrap">編集</button>
+                    </form>
+                </td>
+
+                <td class="text-center no-border-left">
+                    <form method="post" onsubmit="return delete_todo();">
+                        <input type="hidden" name="delete_id" value="{{ id }}">
+                        <button class="btn btn-sm btn-danger text-nowrap">削除</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
